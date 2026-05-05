@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "cobblemonivguarantee",
+  "version": "${version}",
+  "name": "CobblemonIVGuarantee",
+  "description": "Garante que Pokémon lendários, míticos, Ultra Beasts, Paradox e fósseis spawnem com pelo menos 3 IVs perfeitos.",
+  "authors": [
+    "Você"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "com.cobblemonivguarantee.CobblemonIVGuaranteeMod"
+    ]
+  },
+  "mixins": [
+    "cobblemonivguarantee.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "fabric-api": "*",
+    "minecraft": "~1.21.1",
+    "cobblemon": "*"
+  }
+}

@@ -1,0 +1,33 @@
+# Gradle cache e build (nunca commitar)
+.gradle/
+build/
+bin/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Fabric Loom
+run/
+
+# Dependências locais (jars de terceiros)
+libs/
+
+# Arquivos temporários extraídos do jar (só na raiz)
+/com/
+
+# Claude Code (configurações pessoais)
+.claude/
