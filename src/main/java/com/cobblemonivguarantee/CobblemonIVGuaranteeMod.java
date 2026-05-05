@@ -28,13 +28,14 @@ public class CobblemonIVGuaranteeMod implements ModInitializer {
         Stats.SPEED
     };
 
+    // Note: "fossil" is intentionally absent — fossil Pokemon in Cobblemon use label "genX",
+    // not "fossil". They are handled via CobblemonEvents.FOSSIL_REVIVED instead.
     public static final Set<String> SPECIAL_LABELS = Set.of(
         "legendary",
         "mythical",
         "ultra_beast",
         "ultrabeast",
-        "paradox",
-        "fossil"
+        "paradox"
     );
 
     public static final int MIN_PERFECT_IVS = 3;
@@ -45,18 +46,17 @@ public class CobblemonIVGuaranteeMod implements ModInitializer {
 
         // Fossil Pokemon are revived via the Fossil Machine and go directly to the player's party.
         // MobEntity.initialize() is never called for them, so we must use this event instead.
+        // FOSSIL_REVIVED only fires for fossil Pokemon, so no label check is needed here —
+        // fossil Pokemon in Cobblemon do NOT have a "fossil" label in their species JSON.
         CobblemonEvents.FOSSIL_REVIVED.subscribe(event -> {
             Pokemon pokemon = event.getPokemon();
             if (pokemon == null) return;
 
-            Species species = pokemon.getSpecies();
-            if (species == null) return;
-
-            if (!isSpecialPokemon(species)) return;
-
             guaranteeMinPerfectIVs(pokemon.getIvs(), MIN_PERFECT_IVS);
 
-            LOGGER.info("[CobblemonIVGuarantee] {} revivido de fossil com IVs garantidos.", species.getName());
+            Species species = pokemon.getSpecies();
+            String name = species != null ? species.getName() : "Unknown";
+            LOGGER.info("[CobblemonIVGuarantee] {} revivido de fossil com IVs garantidos.", name);
         });
     }
 
